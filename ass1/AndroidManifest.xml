@@ -7,7 +7,6 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
 
-    <!-- Asks for permission to check location, needs fine location and use of internet -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -25,15 +24,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message" >
+            android:name=".SendData"
+            android:label="@string/title_activity_send_data" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.weheartgaming.ass1.MainActivity" />
+                android:value="MainActivity" />
         </activity>
         <activity
-            android:name=".DisplayWebActivity"
-            android:label="@string/title_activity_display_web" >
+            android:name=".GetData"
+            android:label="@string/title_activity_get_data" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name=".GetImage"
+            android:label="@string/title_activity_get_image" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name=".ShowLocation"
+            android:label="@string/title_activity_show_location" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />

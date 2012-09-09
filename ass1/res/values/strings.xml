@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Ass1</string>
-    <string name="edit_message">Enter a message.</string>
+    <string name="app_name">Mobile programming</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="button_send">Send</string>
-    <string name="button_web">Open web</string>
+    <string name="title_activity_main">Mobile Programming</string>
+    <string name="button1">Send data to logging.php</string>
+    <string name="button2">Get 2 types of data</string>
+    <string name="button3">Get image from hig.no</string>
+    <string name="button4">Show location</string>
+    <string name="button5">Save to file</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_display_message">My Message</string>
-    <string name="title_activity_display_web">DisplayWebActivity</string>
+    <string name="title_activity_send_data">Send data</string>
+    <string name="extra">Turn phone to change orientation, supported languages are English and Norwegian</string>
+    <string name="extra2">Below there will be buttons for each task in the assignment </string>
+    <string name="extra3">The report will have information about every task that is not in its own activity</string>
+    <string name="four">4. Retrieve two types of data</string>
+    <string name="title_activity_get_data">Get data</string>
+    <string name="title_activity_get_image">GetImage</string>
+    <string name="title_activity_show_location">ShowLocation</string>
 
 </resources>
