@@ -8,9 +8,17 @@
         android:id="@+id/image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="center"
-        android:tileMode="repeat" >
+        android:layout_gravity="center" >
         
     </ImageView>
+    
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/refresh" />
+        
+    
 
 </LinearLayout>
