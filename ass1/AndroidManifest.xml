@@ -16,6 +16,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        
+        
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
@@ -46,6 +49,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
+        
+        
+        
         <activity
             android:name=".ShowLocation"
             android:label="@string/title_activity_show_location" >

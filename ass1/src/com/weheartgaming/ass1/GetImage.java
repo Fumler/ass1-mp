@@ -5,7 +5,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,14 +44,22 @@ public class GetImage extends Activity {
 		} 
 		// else notify user that he is not connected, and open wireless and network settings
 		else { 
-			Toast.makeText(getApplicationContext(), "No internet connection availible", Toast.LENGTH_LONG).show();
-			
+        	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        	alertDialog.setTitle("Internet is disabled!");
+        	alertDialog.setMessage("Open settings?");
+        	alertDialog.setButton(-3,"OK", new DialogInterface.OnClickListener() {
+        	   public void onClick(DialogInterface dialog, int which) {
+        		   startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+        		   
+       				// not sure how to refresh the activity, so finish this activity and go back to main
+       				//  when the user user clicks back from the settings page
+       				finish();
+        	   }
+        	});
+        	alertDialog.setIcon(R.drawable.ic_launcher);
+        	alertDialog.show();
 
-			startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-			
-			// not sure how to refresh the activity, so finish this activity and go back to main
-			//  when the user user clicks back from the settings page
-			finish();
+
 
 		}
 
