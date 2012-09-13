@@ -1,15 +1,9 @@
 package com.weheartgaming.ass1;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,9 +16,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.Toast;
 
 public class SendData extends Activity {
-	public String url = "http://gtl.hig.no/mobile/logging.php";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,11 +33,11 @@ public class SendData extends Activity {
      	// If connected, show the picture
      	if(networkInfo != null && networkInfo.isConnected()) {
      		// do stuff
-     		new SendGet().execute(url);
+     		new SendGet().execute();
      	} 
      	// else notify user that he is not connected, and open wireless and network settings
      	else { 
-             AlertDialog alertDialog = new AlertDialog.Builderthis).create();
+             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
              alertDialog.setTitle("Internet is disabled!");
              alertDialog.setMessage("Open settings?");
              alertDialog.setButton(-3,"OK", new DialogInterface.OnClickListener() {
@@ -63,41 +57,35 @@ public class SendData extends Activity {
         
     
 	// Creates a new thread and downloads the image in that new thread
-	private class SendGet extends AsyncTask <String, Void, String> {
+	private class SendGet extends AsyncTask <Void, Void, String> {
 		
 		ProgressDialog pd;
 	
 		@Override
-		protected String doInBackground(String...doUrl) {
-			
-			HttpClient httpclient = new DefaultHttpClient();
-	        
-	        HttpPost httppost = new HttpPost(doUrl[0]);
-	        
-	        String send = "Stay a while, and listen!";
-	        
+		protected String doInBackground(Void...params) {
 	        try  {
-	        	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	        	nameValuePairs.add(new BasicNameValuePair("user", "Fredrik"));
-	        	nameValuePairs.add(new BasicNameValuePair("data", send));
 	        	
-	        	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+	        	HttpClient client = new DefaultHttpClient();
+	        	String getURL = "http://gtl.hig.no/mobile/logging.php?user=Fredrik&data=Stay%20a%20while%20and%20listen!";
+	        	HttpGet get = new HttpGet(getURL);
+	        	HttpResponse res = client.execute(get);
 	        	
-	        	HttpResponse reponse = httpclient.execute(httppost);
-	        	
-	        	
+	        	if(res != null) {
+	        		Toast.makeText(getApplicationContext(), "SHIT IS NOT WORKING", Toast.LENGTH_LONG).show();
+	        	}
+
+
 	        } catch(Exception e) {
 	        	System.out.println("ERROR:::::::::" + e);
 	        }
 			
-			return doUrl[0];
+			return null;
 		}
 		
 		@Override
 		protected void onPostExecute(String result) {
 			pd.dismiss();
-			
-			
+
 		}
 		
 		@Override
