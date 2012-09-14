@@ -10,7 +10,7 @@
     <string name="button4">Show location</string>
     <string name="button5">Save to file</string>
     <string name="refresh">Open settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">This is not the text you are looking for.</string>
     <string name="title_activity_send_data">Send data</string>
     <string name="extra">Turn phone to change orientation, supported languages are English and Norwegian</string>
     <string name="extra2">Below there will be buttons for each task in the assignment </string>

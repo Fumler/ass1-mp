@@ -30,7 +30,7 @@ public class SendData extends Activity {
      			getSystemService(Context.CONNECTIVITY_SERVICE);
      	NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
      		
-     	// If connected, show the picture
+     	// If connected, send the message
      	if(networkInfo != null && networkInfo.isConnected()) {
      		// do stuff
      		new SendGet().execute();
