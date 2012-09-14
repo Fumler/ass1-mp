@@ -16,8 +16,9 @@
     <string name="extra2">Below there will be buttons for each task in the assignment </string>
     <string name="extra3">The report will have information about every task that is not in its own activity</string>
     <string name="four">4. Retrieve two types of data</string>
-    <string name="title_activity_get_data">Get data</string>
-    <string name="title_activity_get_image">GetImage</string>
-    <string name="title_activity_show_location">ShowLocation</string>
+    <string name="title_activity_get_data">Download 2 types of data</string>
+    <string name="title_activity_get_image">Download an image</string>
+    <string name="title_activity_show_location">Show current location</string>
+    <string name="title_activity_save_data">Save to file etc</string>
 
 </resources>

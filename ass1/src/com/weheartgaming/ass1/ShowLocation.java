@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,8 +16,9 @@ import android.widget.Toast;
 
 public class ShowLocation extends Activity {
 	public String coords = null;
-	private double lat = 0;
-	private double lon = 0;
+	public String lat = null;
+	public String lon = null;
+	public String provider = null;
 	LocationManager lm;
 	LocationListener ll;
 	
@@ -30,11 +32,13 @@ public class ShowLocation extends Activity {
     	lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     	ll = new MyLocationListener();
     	
+    	Criteria crit = new Criteria();
+    	provider = lm.getBestProvider(crit, false);
+    	Location location = lm.getLastKnownLocation(provider);
+    	
         final boolean gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        
-        
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, ll);
-        
+         
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 20, ll);
         
         if(!gpsEnabled) {
         	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -52,24 +56,16 @@ public class ShowLocation extends Activity {
         	alertDialog.show();
         } else {
         	try {
-        		
-        		double latitude = getLatitude();
-        		double longitude = getLongitude();
-        	Uri uri = Uri.parse("geo:"+latitude+","+longitude);
-        	//Uri test = Uri.parse("geo:37.188331,-103.007812?z=10");
-        	
-        	Toast.makeText(getApplicationContext(), "Location is: "+uri, Toast.LENGTH_LONG).show();
-        	startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        		if(location != null) {
+            		ll.onLocationChanged(location);
+            	}
         	
         	finish();
 
         	} catch(Exception e) {
         		System.out.println("derp:::: "+e);
         	}
-        	
-
         }
-
     }
     
     @Override
@@ -79,47 +75,28 @@ public class ShowLocation extends Activity {
     	lm.removeUpdates(ll);
     }
     
-    public double getLatitude() {
-    	return this.lat;
+    @Override
+    protected void onPause() {
+    	super.onPause();
+    	
+    	lm.removeUpdates(ll);
     }
     
-    public double getLongitude() {
-    	return this.lon;
-    }
 
     public class MyLocationListener implements LocationListener {
     	
     	public void onLocationChanged(Location loc){
-    		loc.getLatitude();
-    		loc.getLongitude();
-    		
-    		if(loc != null) {
-    			double latit = loc.getLatitude();
-    			double longi = loc.getLongitude();
-    			
-    			
-    			synchronized (this) {
-    			if(longi != 0 && latit != 0) {
-        			lat = latit;
-        			lon = longi;
-    			}
-    			
-    			}
 
+    		lat = String.valueOf(loc.getLatitude());
+    		lon = String.valueOf(loc.getLongitude());
     			
-    		}
- 
-    		
-    		
-    		
-//    		String latString = String.valueOf(lat);
-//    		String lonString = String.valueOf(lon);
-//    		
-//    		coords = "geo:" + latString + "," + lonString;
-    		
-    		
+        	Uri uri = Uri.parse("geo:"+lat+","+lon+"?z=17");
+        	//Uri test = Uri.parse("geo:37.188331,-103.007812?z=10");
+        	
+        	Toast.makeText(getApplicationContext(), "Location is: "+uri, Toast.LENGTH_LONG).show();
+        	startActivity(new Intent(Intent.ACTION_VIEW, uri));
+
     	}
-    	
     	
     	public void onProviderDisabled(String provider) {
     		Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT ).show();
@@ -127,15 +104,12 @@ public class ShowLocation extends Activity {
     	}
     	
     	
-        public void onProviderEnabled(String provider)
-        {
-
-          Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
+        public void onProviderEnabled(String provider) {
+        	Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
         }
 
        
-        public void onStatusChanged(String provider, int status, Bundle extras)
-        {
+        public void onStatusChanged(String provider, int status, Bundle extras) {
 
         }
     }

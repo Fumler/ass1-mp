@@ -46,6 +46,14 @@ public class MainActivity extends Activity {
         	}
         });
         
+        Button saveData = (Button) findViewById(R.id.button5);
+        saveData.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		Intent intent = new Intent(v.getContext(),SaveData.class );
+        		startActivity(intent);
+        	}
+        });
+        
     }
 
 

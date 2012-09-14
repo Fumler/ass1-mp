@@ -70,7 +70,7 @@ public class GetData extends Activity {
 	}
 
 	
-	// Creates a new thread and downloads the image in that new thread
+	// Creates a new thread and downloads the text in that new thread
 	private class DownloadText extends AsyncTask <Void, Void, String> {
 		ProgressDialog pd;
 		
